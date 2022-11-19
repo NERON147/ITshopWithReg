@@ -1,5 +1,9 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
+
+
+Vue.use(Router)
+
 import Home from '@/views/Home.vue'
 import Product from '@/views/Products/Product.vue'
 import NewProduct from '@/views/Products/NewProduct.vue'
@@ -8,13 +12,11 @@ import Checkout from '@/views/Checkout.vue'
 import Login from '@/views/Auth/Login.vue'
 import Register from '@/views/Auth/Register.vue'
 
+export default new Router({
+  mode: 'history',
 
 
-
-
-Vue.use(VueRouter)
-
-const routes = [
+  routes: [
   {
     path: '/',
     name: 'home',
@@ -52,11 +54,6 @@ const routes = [
   },
   
 ]
-
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
 })
 
-export default router
+

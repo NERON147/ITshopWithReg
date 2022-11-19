@@ -7,8 +7,8 @@ module.exports = defineConfig({
 
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/ITshop/'
-    : '/',
-    assetsDir: '',
-    productionSourceMap: false
+  ? ''
+  : '/',
+  assetsDir: '',
+  productionSourceMap: false
 }
