@@ -13,7 +13,7 @@ import Login from '@/views/Auth/Login.vue'
 import Register from '@/views/Auth/Register.vue'
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
 
 
   routes: [
