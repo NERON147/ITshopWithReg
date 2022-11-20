@@ -108,10 +108,13 @@ export default {
           description: this.description,
           promo: this.promo
         }
-
-        console.log(product)
+          this.$store.dispatch('createProduct', product)
+        
       }
     }
+  },
+  computed: {
+    
   }
 };
 </script>

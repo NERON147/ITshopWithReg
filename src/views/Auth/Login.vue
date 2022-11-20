@@ -66,6 +66,11 @@ export default {
       return this.$store.getters.loading;
     },
   },
+  created() {
+    if (this.$route.query['loginError']) {
+      this.$store.dispatch('setError', 'Pleace log in to acces this page' )
+    }
+  }
 };
 </script>
 

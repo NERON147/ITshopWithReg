@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import AuthGuard from './auth-guard'
 
 Vue.use(Router)
 
@@ -30,17 +30,20 @@ export default new Router({
   {
     path: '/new',
     name: 'newproduct',
-    component: NewProduct
+    component: NewProduct,
+    beforeEnter: AuthGuard
   },
   {
     path: '/List',
     name: 'list',
-    component: ProductList
+    component: ProductList,
+    beforeEnter: AuthGuard
   },
   {
     path: '/cart',
     name: 'cart',
-    component: Checkout
+    component: Checkout,
+    beforeEnter: AuthGuard
   },
   {
     path: '/login',

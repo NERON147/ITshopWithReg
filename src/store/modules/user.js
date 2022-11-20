@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 
 class User {
@@ -42,6 +42,13 @@ export default {
                 throw error
                 
             }
+        },
+        autoLoginUser ({commit}, payload) {
+            commit('setUser', new User(payload.uid))
+        },
+        logoutUser ({commit}) {
+            signOut(getAuth())
+            commit('setUser', null)
         }
     },
     mutations: {
@@ -52,6 +59,9 @@ export default {
     getters: {
         user(state) {
             return state.user
+        },
+        isUserLoggedIn (state) {
+            return state.user !== null
         }
     },
 }

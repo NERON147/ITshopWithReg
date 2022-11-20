@@ -8,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { initializeApp } from "firebase/app";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 Vue.config.productionTip = false
 
@@ -30,6 +31,13 @@ new Vue({
   router,
   store,
   vuetify,
+  created(){
+onAuthStateChanged(getAuth(), (user) => {
+  if (user) {
+    this.$store.dispatch('autoLoginUser', user)
+  }
+})
+  },
   render: h => h(App)
 }).$mount('#app')
 

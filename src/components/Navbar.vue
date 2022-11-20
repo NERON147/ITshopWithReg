@@ -1,28 +1,47 @@
 <template>
   <div>
     <v-navigation-drawer app temporary v-model="sideNav">
-    <v-list>
-      <v-list-item
-      v-for="(link, index) in links" :key='index' :to="link.url"
-      >
-        <v-list-item-icon>
-          <v-icon>
-            {{link.icon}}
-          </v-icon>
-        </v-list-item-icon>
+      <v-list>
+        <v-list-item v-for="(link, index) in links" :key="index" :to="link.url">
+          <v-list-item-icon>
+            <v-icon>
+              {{ link.icon }}
+            </v-icon>
+          </v-list-item-icon>
 
-        <v-list-item-content>
-          <v-list-item-title v-text="link.title"></v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-  </v-navigation-drawer>
+          <v-list-item-content>
+            <v-list-item-title v-text="link.title"></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        
+        <v-list-item 
+        @click="onLogout"
+        v-if="isUserLoggedIn"
+        >
+          <v-list-item-icon>
+            <v-icon>
+              mdi-exit-to-app
+            </v-icon>
+          </v-list-item-icon>
 
+          <v-list-item-content>
+            <v-list-item-title v-text="'Logout'"></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
 
     <v-toolbar dense shaped dark>
-      <v-app-bar-nav-icon @click="sideNav = !sideNav" class="hidden-md-and-up"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        @click="sideNav = !sideNav"
+        class="hidden-md-and-up"
+      ></v-app-bar-nav-icon>
 
-       <router-link :to="'/'"><v-toolbar-title class="cvet">Online store</v-toolbar-title></router-link> 
+      <router-link :to="'/'"
+        ><v-toolbar-title class="cvet"
+          >Online store</v-toolbar-title
+        ></router-link
+      >
 
       <v-spacer></v-spacer>
 
@@ -30,66 +49,92 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
-
-      <v-btn v-for="(link, index) in links" :key='index' :to="link.url" class="hidden-sm-and-down">
-        {{link.title}}
-        <v-icon right>{{link.icon}}</v-icon>
+      <v-btn
+        v-for="(link, index) in links"
+        :key="index"
+        :to="link.url"
+        class="hidden-sm-and-down"
+      >
+        {{ link.title }}
+        <v-icon right>{{ link.icon }}</v-icon>
+      </v-btn>
+      <v-btn
+        @click="onLogout"
+        v-if="isUserLoggedIn"
+      >
+        Logout
+        <v-icon right>mdi-exit-to-app</v-icon>
       </v-btn>
     </v-toolbar>
 
-
-  <!-- Sizes your content based upon application components -->
-  <v-main>
-
-   
-
+    <!-- Sizes your content based upon application components -->
+    <v-main>
       <!-- If using vue-router -->
       <router-view></router-view>
-    
-  </v-main>
+    </v-main>
   </div>
 </template>
 
 <script>
 export default {
-data () {
+  data() {
     return {
-        sideNav: false,
-
-        links: [
-            {
-                title: 'Login',
-                icon: 'mdi-account-box',
-                url: '/login'
-            },
-            {
-                title: 'Register',
-                icon: 'mdi-account-plus',
-                url: '/register'
-            },
-            {
-                title: 'Cart',
-                icon: 'mdi-cart-variant',
-                url: '/cart'
-            },
-            {
-                title: 'New Product',
-                icon: 'mdi-plus-box',
-                url: '/new'
-            },
-            {
-                title: 'My Products',
-                icon: 'mdi-clipboard-list',
-                url: '/list'
-            }
-        ]
+      sideNav: false,
+    };
+  },
+  methods: {
+    onLogout (){
+      this.$store.dispatch('logoutUser')
+      const path = '/'
+      if (this.$route.path !== path) {
+        this.$router.push('/');
+      }
+      
     }
-}
-}
+  },
+  computed: {
+    isUserLoggedIn() {
+      return this.$store.getters.isUserLoggedIn;
+    },
+    links() {
+      if (this.isUserLoggedIn) {
+        return [
+          {
+            title: "Cart",
+            icon: "mdi-cart-variant",
+            url: "/cart",
+          },
+          {
+            title: "New Product",
+            icon: "mdi-plus-box",
+            url: "/new",
+          },
+          {
+            title: "My Products",
+            icon: "mdi-clipboard-list",
+            url: "/list",
+          },
+        ];
+      }
+      return [
+        {
+          title: "Login",
+          icon: "mdi-account-box",
+          url: "/login",
+        },
+        {
+          title: "Register",
+          icon: "mdi-account-plus",
+          url: "/register",
+        },
+      ];
+    },
+  },
+};
 </script>
 
 <style>
 .cvet {
-  color: #FCFCFC
+  color: #fcfcfc;
 }
 </style>
