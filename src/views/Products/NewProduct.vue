@@ -40,7 +40,7 @@
             v-model="price"
           ></v-text-field>
           <v-textarea
-          auto-grow
+            auto-grow
             label="Description Product"
             name="description"
             type="text"
@@ -49,15 +49,22 @@
         </v-form>
         <v-row class="mb-3">
           <v-col cols="12" xs="12">
-            <v-btn class="warning">
+            <v-btn class="warning" @click="upload">
               Upload
               <v-icon right dark>mdi-cloud-upload</v-icon>
             </v-btn>
+            <input
+              ref="fileInput"
+              type="file"
+              style="display: none"
+              accept="image/*"
+              @change="onFileChange"
+            />
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="12" xs="12">
-            <img src="" height="200px" alt="" />
+            <img :src="imageSrc" height="200px" alt="" v-if="imageSrc" />
           </v-col>
         </v-row>
         <v-row>
@@ -72,7 +79,13 @@
         <v-row>
           <v-col cols="12" xs="12">
             <v-spacer></v-spacer>
-            <v-btn :disabled="!valid" class="success" @click="createProduct">Create product</v-btn>
+            <v-btn
+              :disabled="!valid || loading || !image"
+              :loading="loading"
+              class="success"
+              @click="createProduct"
+              >Create product</v-btn
+            >
           </v-col>
         </v-row>
       </v-col>
@@ -85,20 +98,26 @@ export default {
   data() {
     return {
       promo: false,
-      title: '',
-      vendor: '',
-      color: '',
-      material: '',
+      title: "",
+      vendor: "",
+      color: "",
+      material: "",
       price: 0,
-      description: '',
+      description: "",
       promo: false,
-      valid: false
-
+      valid: false,
+      image: null,
+      imageSrc: "",
     };
   },
+  computed: {
+    loading() {
+      return this.$store.getters.loading;
+    },
+  },
   methods: {
-    createProduct () {
-      if(this.$refs.form.validate()) {
+    createProduct() {
+      if (this.$refs.form.validate() && this.image) {
         const product = {
           title: this.title,
           vendor: this.vendor,
@@ -106,16 +125,35 @@ export default {
           material: this.material,
           price: this.price,
           description: this.description,
-          promo: this.promo
-        }
-          this.$store.dispatch('createProduct', product)
-        
+          promo: this.promo,
+          imageSrc: this.imageSrc,
+        };
+        this.$store.dispatch("createProduct", product);
+        return (
+          (this.title = ""),
+          (this.vendor = ""),
+          (this.color = ""),
+          (this.material = ""),
+          (this.price = ""),
+          (this.description = ""),
+          (this.promo = false),
+          (this.imageSrc = "")
+        );
       }
-    }
+    },
+    upload() {
+      this.$refs.fileInput.click();
+    },
+    onFileChange(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imageSrc = reader.result;
+      };
+      reader.readAsDataURL(file);
+      this.image = file;
+    },
   },
-  computed: {
-    
-  }
 };
 </script>
 

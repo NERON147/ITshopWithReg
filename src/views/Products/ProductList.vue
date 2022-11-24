@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row v-if="!loading && MY_PRODUCTS.length !== 0 ">
         <v-col
         xs='12'
         sm="6" offset-lg="3">
@@ -28,6 +28,36 @@
         </v-card>
         </v-col>
     </v-row>
+    <v-row v-else-if="!loading && MY_PRODUCTS.length === 0">
+      <v-col xs='12' class="text-center">
+        <h1 class="text--primary">You have no products</h1>
+      </v-col>
+    </v-row>
+    <v-row v-else>
+      <v-col xs='12' class="text-xs-center">
+        <v-sheet class="pa-3">
+            <v-skeleton-loader
+              class="mx-auto"
+              max-width="500"
+              type="card"
+            ></v-skeleton-loader>
+          </v-sheet>
+          <v-sheet class="pa-3">
+            <v-skeleton-loader
+              class="mx-auto"
+              max-width="500"
+              type="card"
+            ></v-skeleton-loader>
+          </v-sheet>
+          <v-sheet class="pa-3">
+            <v-skeleton-loader
+              class="mx-auto"
+              max-width="500"
+              type="card"
+            ></v-skeleton-loader>
+          </v-sheet>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -41,8 +71,12 @@ export default {
   computed: {
     MY_PRODUCTS () {
       return this.$store.getters.MY_PRODUCTS
-    }
+    },
+    loading () {
+    return this.$store.getters.loading
   }
+  }
+  
 }
 </script>
 

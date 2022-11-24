@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <section elevation="13" class="product mt-3">
+    <section elevation="13" class="product mt-3" v-if="!loading">
       <v-row>
         <v-col wrap xs='12' lg='6'>
           <img :src="product.imageSrc" alt="" class="product-img">
@@ -29,7 +29,7 @@
             <div class="title mb-5">
               <p class="product-title mb-2">Description: </p>{{product.description}}
             </div>
-            <v-btn color="primary" class="healine">Edit</v-btn>
+            <EditProduct :product='product' v-if="isOwner"></EditProduct>
             <v-btn color="primary" class="healine ml-4">Buy</v-btn>
 
           </div>
@@ -40,7 +40,12 @@
 </template>
 
 <script>
+import EditProduct from '@/components/EditProduct.vue'
+
 export default {
+components: {EditProduct},
+  props: ['id'],
+
    data () {
     return {
        product: null,
@@ -50,6 +55,15 @@ created () {
     let id = this.$route.params.id
     this.product = this.$store.getters.GET_PRODUCT(id)
 },
+computed: {
+  loading () {
+    return this.$store.getters.loading
+  },
+  isOwner () {
+    return this.product.ownerId === this.$store.getters.user.id
+  }
+}
+
 }
 </script>
 

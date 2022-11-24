@@ -35,7 +35,7 @@ export default {
                 const user = await signInWithEmailAndPassword(getAuth(), email, password)
                 commit('setUser', new User(user.user.uid))
                 commit('setLoading', false)
-                
+                console.log(user.user.uid)
             } catch (error) {
                 commit('setLoading', false)
                 commit('setError', error.message)

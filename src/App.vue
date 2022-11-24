@@ -41,6 +41,10 @@ export default {
     error () {
       return this.$store.getters.error
     }
-  }
+  },
+   created(){
+    this.$store.dispatch('loadProducts')
+    
+   }
 };
 </script>
