@@ -30,7 +30,7 @@
               <p class="product-title mb-2">Description: </p>{{product.description}}
             </div>
             <EditProduct :product='product' v-if="isOwner"></EditProduct>
-            <v-btn color="primary" class="healine ml-4">Buy</v-btn>
+            <BuyModal :product='product' class="pl-5"></BuyModal>
 
           </div>
         </v-col>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import EditProduct from '@/components/EditProduct.vue'
+import EditProduct from '@/components/UI/EditProduct.vue'
 
 export default {
 components: {EditProduct},

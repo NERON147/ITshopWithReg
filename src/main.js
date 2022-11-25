@@ -3,12 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
-
+import BuyModalComponent from '@/components/UI/BuyModal'
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import '@/plugins/swiper'
 
 Vue.config.productionTip = false
+Vue.component('BuyModal', BuyModalComponent)
 
 import '@/assets/main.css'
 

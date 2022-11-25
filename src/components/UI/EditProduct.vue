@@ -70,7 +70,7 @@ export default {
 
     onSave () {
         if (this.editedTitle !== '' && this.editedDescription !== '') {
-            this.$store.dispatch('updateProducts', {
+            this.$store.dispatch('createProducts', {
                 title: this.editedTitle,
                 description: this.editedDescription,
                 id: this.product.id

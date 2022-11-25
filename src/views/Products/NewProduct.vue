@@ -127,8 +127,10 @@ export default {
           description: this.description,
           promo: this.promo,
           imageSrc: this.imageSrc,
+          
         };
         this.$store.dispatch("createProduct", product);
+        
         return (
           (this.title = ""),
           (this.vendor = ""),

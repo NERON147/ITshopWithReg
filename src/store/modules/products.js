@@ -6,13 +6,13 @@ import axios from 'axios'
 export default ({
   state: {
     products: [
-      
+
     ]
   },
 
   mutations: {
-    
-    SET_PRODUCTS (state, products) {
+
+    SET_PRODUCTS(state, products) {
       state.products = products
     }
   },
@@ -30,34 +30,35 @@ export default ({
         promo: payload.promo,
         ownerId: getters.user.id
       }
-      try { 
-      commit('clearError')  
-      commit('setLoading', true)
-      await axios.post('https://online-store-ed667-default-rtdb.europe-west1.firebasedatabase.app/products.json', newProduct)
-      commit('setLoading', false)
+      try {
+        commit('clearError')
+        commit('setLoading', true)
+        await axios.post('https://online-store-ed667-default-rtdb.europe-west1.firebasedatabase.app/products.json', newProduct)
+        commit('setLoading', false)
 
-    }
-    catch (error) {
-      commit('setLoading', false)
-      commit('setError', error.message)
-      throw error
-  }
-        
-    
+      }
+      catch (error) {
+        commit('setLoading', false)
+        commit('setError', error.message)
+        throw error
+      }
+
+
     },
-    async loadProducts({commit}){
+    async loadProducts({ commit }) {
       commit('setLoading', true)
       await axios.get('https://online-store-ed667-default-rtdb.europe-west1.firebasedatabase.app/products.json')
-      .then(res => {
-        const products = []
-        for(let key in res.data){
-          products.push({...res.data[key], id: key})
-        }
-        commit("SET_PRODUCTS", products)
-      })
+        .then(res => {
+          const products = []
+          console.log(products)
+          for (let key in res.data) {
+            products.push({ ...res.data[key], id: key })
+          }
+          commit("SET_PRODUCTS", products)
+        })
       commit('setLoading', false)
     },
-    async updateProducts ({commit}, {title, description, id}) {
+    async updateProducts({ commit }, { title, description, id }) {
       const updateProduct = {
         id: id,
         title: title,
@@ -65,16 +66,16 @@ export default ({
       }
       console.log(updateProduct)
       try {
-      commit('clearError')
-      commit('setLoading', true)
-      await axios.patch(`https://online-store-ed667-default-rtdb.europe-west1.firebasedatabase.app/products/${id}.json`, updateProduct)
-      commit('setLoading', false)
+        commit('clearError')
+        commit('setLoading', true)
+        await axios.patch(`https://online-store-ed667-default-rtdb.europe-west1.firebasedatabase.app/products/${id}.json`, updateProduct)
+        commit('setLoading', false)
       }
       catch (error) {
         commit('setLoading', false)
         commit('setError', error.message)
         throw error
-    }
+      }
     }
 
 

@@ -65,7 +65,7 @@
                 Description
               </v-btn>
 
-              <v-btn color="dark"> Add to Cart </v-btn>
+              <BuyModal :product="product"></BuyModal>
             </v-card-actions>
           </v-card>
         </v-col>
