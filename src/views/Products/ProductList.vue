@@ -22,6 +22,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn class="info" :to="'/product/' + product.id">Open</v-btn>
+                <DeleteProd :product='product'></DeleteProd>
               </v-card-actions>
             </v-col>
           </v-row>
@@ -75,7 +76,8 @@ export default {
     loading () {
     return this.$store.getters.loading
   }
-  }
+  },
+  
   
 }
 </script>

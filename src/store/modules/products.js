@@ -52,7 +52,7 @@ export default ({
           const products = []
           console.log(products)
           for (let key in res.data) {
-            products.push({ ...res.data[key], id: key })
+            products.push({ ...res.data[key], id: key,  })
           }
           commit("SET_PRODUCTS", products)
         })
@@ -69,6 +69,19 @@ export default ({
         commit('clearError')
         commit('setLoading', true)
         await axios.patch(`https://online-store-ed667-default-rtdb.europe-west1.firebasedatabase.app/products/${id}.json`, updateProduct)
+        commit('setLoading', false)
+      }
+      catch (error) {
+        commit('setLoading', false)
+        commit('setError', error.message)
+        throw error
+      }
+    },
+    async dellProduct({ commit }, id) {
+      try {
+        commit('clearError')
+        commit('setLoading', true)
+        await axios.delete(`https://online-store-ed667-default-rtdb.europe-west1.firebasedatabase.app/products/${id}.json`)
         commit('setLoading', false)
       }
       catch (error) {
