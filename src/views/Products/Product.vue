@@ -3,7 +3,7 @@
     <section elevation="13" class="product mt-3" v-if="!loading">
       <v-row>
         <v-col wrap xs='12' lg='6'>
-          <img :src="product.imageSrc" alt="" class="product-img">
+          <img :src="product.imageSrc" alt="" class="product-img d-flex justify-center">
         </v-col>
       
         <v-col wrap xs='12' lg='6'>

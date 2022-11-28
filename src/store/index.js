@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 import products from './modules/products.js'
 import user from './modules/user.js'
 import common from './modules/common.js'
-import orders from './modules/orders'
+import orders from './modules/orders.js'
+import cart from './modules/cart.js'
 
 
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     products,
     user,
     common,
-    orders
+    orders,
+    cart
   }
 })

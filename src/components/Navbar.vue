@@ -31,7 +31,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-toolbar dense shaped dark>
+    <v-app-bar app dense shaped dark>
       <v-app-bar-nav-icon
         @click="sideNav = !sideNav"
         class="hidden-md-and-up"
@@ -55,9 +55,11 @@
         :to="link.url"
         class="hidden-sm-and-down"
       >
-        {{ link.title }}
+        {{ link.title }} 
         <v-icon right>{{ link.icon }}</v-icon>
       </v-btn>
+      <span class="cart-length">{{CART.length}}</span>
+      
       <v-btn
         @click="onLogout"
         v-if="isUserLoggedIn"
@@ -65,7 +67,7 @@
         Logout
         <v-icon right>mdi-exit-to-app</v-icon>
       </v-btn>
-    </v-toolbar>
+    </v-app-bar>
 
     <!-- Sizes your content based upon application components -->
     <v-main>
@@ -96,13 +98,16 @@ export default {
     isUserLoggedIn() {
       return this.$store.getters.isUserLoggedIn;
     },
+    CART () {
+      return this.$store.getters.CART
+    },
     links() {
       if (this.isUserLoggedIn) {
         return [
           {
-            title: "Cart",
+            title: "Check out",
             icon: "mdi-cart-variant",
-            url: "/cart",
+            url: "/checkout",
           },
           {
             title: "New Product",
@@ -127,6 +132,11 @@ export default {
           icon: "mdi-account-plus",
           url: "/register",
         },
+        {
+            title: "Cart",
+            icon: "mdi-cart-variant",
+            url: "/cart",
+          },
       ];
     },
   },

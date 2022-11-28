@@ -50,7 +50,6 @@ export default ({
       await axios.get('https://online-store-ed667-default-rtdb.europe-west1.firebasedatabase.app/products.json')
         .then(res => {
           const products = []
-          console.log(products)
           for (let key in res.data) {
             products.push({ ...res.data[key], id: key,  })
           }
@@ -64,7 +63,6 @@ export default ({
         title: title,
         description: description,
       }
-      console.log(updateProduct)
       try {
         commit('clearError')
         commit('setLoading', true)

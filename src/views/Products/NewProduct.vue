@@ -98,6 +98,7 @@ export default {
   data() {
     return {
       promo: false,
+      id: '',
       title: "",
       vendor: "",
       color: "",

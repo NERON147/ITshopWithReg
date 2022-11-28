@@ -11,6 +11,7 @@ import ProductList from '@/views/Products/ProductList.vue'
 import Checkout from '@/views/Checkout.vue'
 import Login from '@/views/Auth/Login.vue'
 import Register from '@/views/Auth/Register.vue'
+import Cart from '@/views/Cart.vue'
 
 export default new Router({
   // mode: 'history',
@@ -40,10 +41,15 @@ export default new Router({
     beforeEnter: AuthGuard
   },
   {
-    path: '/cart',
-    name: 'cart',
+    path: '/checkout',
+    name: 'checkout',
     component: Checkout,
     beforeEnter: AuthGuard
+  },
+  {
+    path: '/cart',
+    name: 'cart',
+    component: Cart,
   },
   {
     path: '/login',

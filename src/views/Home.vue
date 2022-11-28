@@ -66,6 +66,8 @@
               </v-btn>
 
               <BuyModal :product="product"></BuyModal>
+
+              <v-btn @click="addToCard(product)">Купить</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -147,6 +149,25 @@ export default {
     loading() {
       return this.$store.getters.loading;
     },
+  },
+
+  methods: {
+    addToCard(product) {
+      let cartItem = {
+        id: product.id,
+        color: product.color,
+        description: product.description,
+        imageSrc: product.imageSrc,
+        material: product.material,
+        ownerId: product.ownerId,
+        price: product.price,
+        promo: product.promo,
+        title: product.title,
+        vendor: product.vendor,
+        quantity: 1
+      }
+      this.$store.dispatch('ADD_TO_CART', cartItem)
+    }
   },
 };
 </script>

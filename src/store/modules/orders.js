@@ -41,7 +41,6 @@ export default {
             await axios.get(`https://online-store-ed667-default-rtdb.europe-west1.firebasedatabase.app/users/${getters.user.id}/orders.json`)
             .then(res => {
               const resultOrders = []
-              console.log(resultOrders)
               for(let key in res.data){
                 resultOrders.push({...res.data[key], id: key})
               }
@@ -53,7 +52,6 @@ export default {
             const updateProduct = {
               done: true
             }
-            console.log(updateProduct)
             try {
               commit('clearError')
               commit('setLoading', true)
