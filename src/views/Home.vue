@@ -65,8 +65,6 @@
                 Description
               </v-btn>
 
-              <BuyModal :product="product"></BuyModal>
-
               <v-btn @click="addToCard(product)">Купить</v-btn>
             </v-card-actions>
           </v-card>
