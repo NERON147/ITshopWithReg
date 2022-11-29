@@ -13,6 +13,7 @@
             <v-list-item-title v-text="link.title"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+      <span class="cart-length cart-length-pop">{{CART.length}}</span>
         
         <v-list-item 
         @click="onLogout"
@@ -58,7 +59,7 @@
         {{ link.title }} 
         <v-icon right>{{ link.icon }}</v-icon>
       </v-btn>
-      <span class="cart-length">{{CART.length}}</span>
+      <span class="cart-length hidden-sm-and-down">{{CART.length}}</span>
       
       <v-btn
         @click="onLogout"

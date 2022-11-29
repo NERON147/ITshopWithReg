@@ -16,32 +16,6 @@ export default {
         }
     },
     actions: {
-        async pushOrder({ commit }, product) {
-            const orderToTG = {
-                titile: product.title,
-                price: product.price,
-                quantity: product.quantity
-
-            }
-            const chatId = "-1001585192425";
-            try {
-                commit('clearError')
-                commit('setLoading', true)
-                await axios.post(`https://api.telegram.org/bot5704317545:AAF437LLv5g5GPegKVvaVvQgPV-v7nnqHFI/sendMessage`, {
-                    chat_id: chatId,
-                    parse_mode: 'html',
-                    text: orderToTG,
-                })
-                commit('setLoading', false)
-                
-
-            }
-            catch (error) {
-                commit('setLoading', false)
-                commit('setError', error.message)
-                throw error
-            }
-        },
         async createOrder({ commit, getters }, { ownerId, name, phone, productId, done }) {
             const newOrder = {
                 name,

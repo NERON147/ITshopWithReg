@@ -1,5 +1,7 @@
 import Vue from 'vue'
 
+import axios from 'axios'
+
 export default {
     state: {
         cart: []
@@ -60,7 +62,29 @@ export default {
           },
           setCartFromLC({commit}, cart) {
             commit('UPDATE_CART', cart)
-          }
+          },
+          async pushOrder({ commit }, message) {
+            const orderToTG = message
+            const chatId = "-1001585192425";
+            try {
+                commit('clearError')
+                commit('setLoading', true)
+                await axios.post(`https://api.telegram.org/bot5704317545:AAF437LLv5g5GPegKVvaVvQgPV-v7nnqHFI/sendMessage`, {
+                    chat_id: chatId,
+                    parse_mode: 'html',
+                    text: orderToTG,
+                })
+                commit('setLoading', false)
+            localStorage.clear()
+                
+
+            }
+            catch (error) {
+                commit('setLoading', false)
+                commit('setError', error.message)
+                throw error
+            }
+        },
     },
     getters: {
         CART(state) {

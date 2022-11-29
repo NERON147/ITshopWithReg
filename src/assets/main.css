@@ -157,3 +157,9 @@ a {
 .buybtn {
   margin: 100px 0px 50px 0px;
 }
+
+.cart-length-pop {
+  position: absolute;
+  margin: -45px 0px 0px 120px;
+
+}

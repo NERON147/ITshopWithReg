@@ -82,16 +82,18 @@ export default {
     },
 
     onSubmit() {
-      
+      let productItem = ''
+
       this.product.forEach((item) =>{
-        const productItem = {
-          title: item.title,
-          price: item.price,
-          quantity: item.quantity 
-        }
+        productItem += `<b> Название товара: </b>  ${item.title} \n <b> Цена товара: </b> ${item.price} \n <b> Кол-во: </b>  ${item.quantity} \n`
+        
          console.log(productItem)
-      this.$store.dispatch('pushOrder', productItem)
       })
+
+      let message = `<b> Пришел заказ, можно оформлять! </b>\n`;
+       message += `<b> Товар:  </b>\n ${productItem}\n`
+       message += `<b> Общая стоимость:</b>  ${this.cartTotalCost} $ \n`
+      this.$store.dispatch('pushOrder', message)
       
     }
   },

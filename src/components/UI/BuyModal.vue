@@ -21,6 +21,7 @@
                 type="text"
                 v-model="name"
                 hide-details="auto"
+                required
               ></v-text-field>
               <v-text-field
                 name="phone"
@@ -28,6 +29,7 @@
                 type="tel"
                 v-model="phone"
                 hide-details="auto"
+                required
               ></v-text-field>
             </v-card-text>
           </div>
@@ -80,6 +82,7 @@ export default {
     onSave() {
       if (this.name !== "" && this.phone !== "") {
         this.loacalLOading = true;
+        let message = `<b> Номер телеофна: </b> ${this.phone} \n <b> Имя: </b>  ${this.name} \n`
         this.$store
           .dispatch("createOrder", {
             name: this.name,
@@ -90,6 +93,7 @@ export default {
           .finally(() => {
             (this.name = ""), (this.phone = ""), (this.localLoading = false);
             this.dialog = false;
+            this.$store.dispatch("pushOrder", message)
           });
       }
     },
