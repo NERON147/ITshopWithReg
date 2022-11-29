@@ -47,6 +47,7 @@
               <v-btn
                 dark
                 color="light-blue darken-4"
+                v-on:click="onSubmit(product)"
                 @click="onSave"
                 :disabled="localLoading"
                 :loading="localLoading"
@@ -92,6 +93,11 @@ export default {
           });
       }
     },
+
+
+    onSubmit () {
+        this.$emit('onSubmit', this.product)
+      },
   },
   computed: {
   loading () {

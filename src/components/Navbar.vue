@@ -119,6 +119,11 @@ export default {
             icon: "mdi-clipboard-list",
             url: "/list",
           },
+          {
+            title: "Cart",
+            icon: "mdi-cart-variant",
+            url: "/cart",
+          },
         ];
       }
       return [

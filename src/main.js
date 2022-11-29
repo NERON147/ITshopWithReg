@@ -16,6 +16,12 @@ Vue.component('DeleteProd', DeleteProductComponent)
 
 import '@/assets/main.css'
 
+const cart = JSON.parse(localStorage.getItem('cart'))
+
+if(cart) {
+  store.dispatch('setCartFromLC', cart)
+}
+
 const firebaseConfig = {
   apiKey: "AIzaSyAf03M5Zs-_kjCa5yruXoAN9Azg61hIkis",
   authDomain: "online-store-ed667.firebaseapp.com",

@@ -21,7 +21,17 @@
           </div>
         </v-col>
         <v-col sm="4" >
-          <v-card class="result"> 1234 </v-card>
+          <v-card class="result"> 
+            <div>
+            ОБЩАЯ СУММА:
+            {{cartTotalCost.toLocaleString()}} $
+            </div>
+            <div>
+              <BuyModal :product="product" @onSubmit='onSubmit()'></BuyModal>
+
+            </div>
+            
+          </v-card>
         </v-col>
       </v-row>
     </v-container>
@@ -32,6 +42,7 @@
 export default {
   data() {
     return {
+       product: null,
       
     };
   },
@@ -39,6 +50,25 @@ export default {
     PRODUCTS() {
       return this.$store.getters.CART;
     },
+     cartTotalCost() {
+            let result = []
+
+            if (this.PRODUCTS.length) {
+               for (let item of this.PRODUCTS) {
+                result.push(item.price * item.quantity)
+            }
+
+            result = result.reduce(function (sum, el){
+                return sum + el
+            }) 
+
+            return result  
+            } else {
+                return 0
+            }
+            
+           
+        }
   },
   methods: {
      DELETE(index) {
@@ -50,7 +80,24 @@ export default {
     DECREMENT(index) {
       this.$store.dispatch('DECREMENT_CART_ITEM', index)
     },
+
+    onSubmit() {
+      
+      this.product.forEach((item) =>{
+        const productItem = {
+          title: item.title,
+          price: item.price,
+          quantity: item.quantity 
+        }
+         console.log(productItem)
+      this.$store.dispatch('pushOrder', productItem)
+      })
+      
+    }
   },
+  created () {
+    this.product = this.$store.getters.CART;
+  }
 };
 </script>
 

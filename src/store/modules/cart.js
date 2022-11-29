@@ -22,6 +22,7 @@ export default {
         state.cart.push(product)
         // Vue.set(product, 'quantity', 1);
       }
+      localStorage.setItem('cart', JSON.stringify(state.cart))
         },
         REMOVE_FROM_CART (state, index) {
             state.cart.splice(index, 1)
@@ -40,6 +41,9 @@ export default {
       
             }
           },
+          UPDATE_CART (state, cart) {
+            state.cart = cart
+          }
     },
     actions: {
         ADD_TO_CART({commit}, product) {
@@ -54,6 +58,9 @@ export default {
           DECREMENT_CART_ITEM({commit}, index) {
             commit('DECREMENT', index)
           },
+          setCartFromLC({commit}, cart) {
+            commit('UPDATE_CART', cart)
+          }
     },
     getters: {
         CART(state) {
