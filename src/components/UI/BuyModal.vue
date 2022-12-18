@@ -22,6 +22,7 @@
                 v-model="name"
                 hide-details="auto"
                 required
+                :rules="[(v) => !!v || 'Name is require']"
               ></v-text-field>
               <v-text-field
                 name="phone"
@@ -30,6 +31,7 @@
                 v-model="phone"
                 hide-details="auto"
                 required
+                :rules="[(v) => !!v || 'Phone is require']"
               ></v-text-field>
             </v-card-text>
           </div>
@@ -47,12 +49,12 @@
                 >Close</v-btn
               >
               <v-btn
-                dark
-                color="light-blue darken-4"
+               
                 v-on:click="onSubmit(product)"
                 @click="onSave"
-                :disabled="localLoading"
+                :disabled="localLoading || !this.name || !this.phone"
                 :loading="localLoading"
+                class="success"
                 >Buy it!</v-btn
               >
             </v-card-actions>
@@ -94,7 +96,6 @@ export default {
             (this.name = ""), (this.phone = ""), (this.localLoading = false);
             this.dialog = false;
             this.$store.dispatch("pushOrder", message)
-            
           });
       }
     },
