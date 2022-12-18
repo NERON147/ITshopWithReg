@@ -26,10 +26,11 @@ export default {
                 },
                 640: {
                   slidesPerView: 1,
+                  spaceBetween: 500,
                 },
                 320: {
                   slidesPerView: 1,
-                  
+                  spaceBetween: 500,
                 }
               },
           
@@ -78,13 +79,13 @@ export default {
                   
                 },
                 640: {
-                  slidesPerView: 1,
-                  
-                },
-                320: {
-                  slidesPerView: 1,
-                  
-                }
+                    slidesPerView: 1,
+                    spaceBetween: 500,
+                  },
+                  320: {
+                    slidesPerView: 1,
+                    spaceBetween: 500,
+                  }
               },
           
             // If we need pagination
