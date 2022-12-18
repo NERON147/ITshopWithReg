@@ -12,6 +12,8 @@ import Checkout from '@/views/Checkout.vue'
 import Login from '@/views/Auth/Login.vue'
 import Register from '@/views/Auth/Register.vue'
 import Cart from '@/views/Cart.vue'
+import Success from '@/views/Success.vue'
+
 
 export default new Router({
   // mode: 'history',
@@ -60,6 +62,11 @@ export default new Router({
     path: '/register',
     name: 'register',
     component: Register
+  },
+  {
+    path: '/success',
+    name: 'success',
+    component: Success
   },
   
 ],

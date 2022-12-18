@@ -94,8 +94,12 @@ export default {
        message += `<b> Товар:  </b>\n ${productItem}\n`
        message += `<b> Общая стоимость:</b>  ${this.cartTotalCost} $ \n`
       this.$store.dispatch('pushOrder', message)
-      
+      .then(() => {
+        this.$router.push('/success')
+        location.reload()
+    })
     }
+    
   },
   created () {
     this.product = this.$store.getters.CART;

@@ -130,7 +130,12 @@
 </template>
 
 <script>
+
+  import home from "../mixins/home";
+
 export default {
+  mixins: [home],
+
   data() {
     return {
       
@@ -149,7 +154,7 @@ export default {
     },
   },
 
-  methods: {
+  methods: { 
     addToCard(product) {
       let cartItem = {
         id: product.id,
@@ -167,6 +172,8 @@ export default {
       this.$store.dispatch('ADD_TO_CART', cartItem)
     }
   },
+
+  
 };
 </script>
 

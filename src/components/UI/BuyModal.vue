@@ -94,6 +94,7 @@ export default {
             (this.name = ""), (this.phone = ""), (this.localLoading = false);
             this.dialog = false;
             this.$store.dispatch("pushOrder", message)
+            
           });
       }
     },

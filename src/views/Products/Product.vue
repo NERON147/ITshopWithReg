@@ -30,8 +30,7 @@
               <p class="product-title mb-2">Description: </p>{{product.description}}
             </div>
             <EditProduct :product='product' v-if="isOwner" class="edit"></EditProduct>
-            <BuyModal :product='product'></BuyModal>
-            <DeleteProd :product='product'></DeleteProd>
+            <DeleteProd :product='product' v-if="isOwner"></DeleteProd>
           </div>
         </v-col>
       </v-row>
