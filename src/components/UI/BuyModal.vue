@@ -91,6 +91,7 @@ export default {
             phone: this.phone,
             productId: this.product.id,
             ownerId: this.product.ownerId,
+            done: false
           })
           .finally(() => {
             (this.name = ""), (this.phone = ""), (this.localLoading = false);

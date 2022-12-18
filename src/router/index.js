@@ -17,6 +17,7 @@ import Success from '@/views/Success.vue'
 
 export default new Router({
   // mode: 'history',
+  
 
 
   routes: [

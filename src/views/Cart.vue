@@ -1,6 +1,7 @@
 <template>
   <v-container text-center>
-    <h1>Cart</h1>
+    <h1 v-if="PRODUCTS.length !== 0">Корзина</h1>
+    <h1 v-if="PRODUCTS.length < 1">Корзина пуста((</h1>
     <v-container>
       <v-row>
         <v-col sm="8" class="cart" >
@@ -20,7 +21,7 @@
             </div>
           </div>
         </v-col>
-        <v-col sm="4" >
+        <v-col sm="4" v-if="PRODUCTS.length">
           <v-card class="result"> 
             <div>
             ОБЩАЯ СУММА:

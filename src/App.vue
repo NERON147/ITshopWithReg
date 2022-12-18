@@ -1,7 +1,7 @@
 <template>
+<div id="app">
   <v-app>
-    <navbar />
-    
+    <Navbar></Navbar>
   <template v-if="error">
     <v-snackbar
     color="error"
@@ -23,14 +23,15 @@
     </v-snackbar>
     </template>
   </v-app>
+</div>
 </template>
 
 <script>
-import navbar from "@/components/Navbar.vue";
+import Navbar from "@/components/Navbar.vue";
 
 export default {
   components: {
-    navbar,
+    Navbar,
   },
   methods: {
     closeError() {
@@ -48,3 +49,19 @@ export default {
    }
 };
 </script>
+
+
+<style>
+.fade-enter-active, .fade-leave-active {
+  transition-property: opacity;
+  transition-duration: .25s;
+}
+
+.fade-enter-active {
+  transition-delay: .25s;
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
+</style>

@@ -16,12 +16,13 @@ export default {
         }
     },
     actions: {
-        async createOrder({ commit, getters }, { ownerId, name, phone, productId, done }) {
+        async createOrder({ commit, getters }, { name, phone, productId, ownerId, done }) {
             const newOrder = {
                 name,
                 phone,
                 productId,
-                done: false
+                ownerId,
+                done
             }
             try {
                 commit('clearError')
