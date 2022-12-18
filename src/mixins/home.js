@@ -26,7 +26,6 @@ export default {
                 },
                 640: {
                   slidesPerView: 1,
-                  
                 },
                 320: {
                   slidesPerView: 1,
