@@ -59,7 +59,7 @@ computed: {
     return this.$store.getters.loading
   },
   isOwner () {
-    return this.product.ownerId === this.$store.getters.user.id
+    return this.product.ownerId === this.$store.getters?.user?.id
   }
 },
 methods: {
